@@ -1,0 +1,57 @@
+import { Entity, Vec3 } from "playcanvas";
+import { AssetLoader } from "../../../../assetLoader/assetLoader";
+import { BoxCollider } from "../../../../physics/scripts/boxCollider";
+import { CollisionTag } from "../../../../physics/collisionTag";
+import { GameConstant } from "../../../../gameConstant";
+import { SpawningEvent } from "../../../script/spawners/spawningEvent";
+import { BlockAreaManager } from "../../blockArea/blockAreaManager";
+import { ObjectFactory } from "../../../../template/objects/objectFactory";
+export class Fork extends Entity {
+    constructor() {
+        super("Fork");
+        this.Fork = this.addComponent("model", { asset: AssetLoader.getAssetByKey("Fork") });
+
+        // TODO: test hand take burger
+        this.fork1 = this.findByName("_1_Fork");
+        this.collider = this.addScript(BoxCollider, {
+            tag: CollisionTag.fork,
+            render: GameConstant.DEBUG_COLLIDER,
+            position: new Vec3(-5.2, -100, 0),
+            scale: new Vec3(100, 100, 100),
+            target: this.fork1
+        });
+        // let burger = ObjectFactory.createModel("BurgerTop");
+        // burger.setLocalScale(200, 200, 200);
+        // this.palm.addChild(burger);
+
+        this.on(SpawningEvent.Spawn, () => {
+            this.collider.enable();
+            this.collider.respawn();
+            BlockAreaManager.instance.addRoadBlockArea(this.collider);
+        });
+        this.addComponent("animation", {
+            assets: [
+                AssetLoader.getAssetByKey("Action"),
+            ],
+            loop: true,
+            activate: true, // Đặt activate là true để animation tự động chạy
+        });
+        this.animation.speed = 1
+    }
+
+    config(data) {
+        let pos = data.pos;
+        let rot = data.rot;
+        let scale = data.scale;
+        this.setLocalPosition(pos.x, pos.y, pos.z);
+        this.setLocalEulerAngles(rot.x, rot.y, rot.z);
+        this.setLocalScale(scale.x, scale.y, scale.z);
+
+
+    }
+
+    onCollide() {
+        //this.collider && this.collider.disable();
+        //  this.fire(SpawningEvent.Despawn);
+    }
+}

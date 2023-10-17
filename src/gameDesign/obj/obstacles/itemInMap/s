@@ -1,0 +1,7 @@
+ let candy5SpawnerEntity = new Entity("candy5SpawnerEntity");
+        this.addChild(candy5SpawnerEntity);
+        this.candy5Spawner = candy5SpawnerEntity.addScript(Spawner, {
+            class: Character,
+            poolSize: 10,
+            args: ["Candy5"]
+        });

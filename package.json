@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "@tweenjs/tween.js": "^20.0.3",
+    "base64-js": "^1.5.1",
+    "canvas-confetti": "^1.6.0",
+    "playcanvas": "1.63.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hoangvietnguyen1105/BasePlaycanvas.git"
+  },
+  "devDependencies": {
+    "base64-arraybuffer": "^1.0.2",
+    "brotli": "^1.3.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "datauri": "^4.1.0",
+    "esbuild-loader": "^3.0.1",
+    "html-inline-script-webpack-plugin": "^3.1.0",
+    "html-webpack-plugin": "^5.5.1",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^4.15.0"
+  },
+  "name": "base",
+  "version": "1.0.0",
+  "main": "game.js",
+  "scripts": {
+    "data": "node ./scripts/assetReader.js",
+    "start": "webpack serve --env env=dev --open",
+    "build": "webpack --env env=preview",
+    "clean-gh-pages-cached": "node node_modules/gh-pages/bin/gh-pages-clean",
+    "deploy": "gh-pages -d dist",
+    "base64Data ": "node ./scripts/base64Data"
+  },
+  "author": "NHV",
+  "license": "ISC",
+  "description": ""
+}
